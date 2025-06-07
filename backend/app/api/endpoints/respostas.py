@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import desc, asc
 from typing import List
 
-from backend.app.db.database import get_db
-from backend.app.db.models.models import Resposta, Email
-from backend.app.schemas.schemas import RespostaCreate, Resposta as RespostaSchema
-from backend.app.schemas.filters import RespostaFilter
+from app.db.database import get_db
+from app.db.models.models import Response as Resposta, Email
+from app.schemas.schemas import ResponseCreate as RespostaCreate, ResponseResponse as RespostaSchema
+from app.schemas.filters import ResponseFilter as RespostaFilter
 
 router = APIRouter()
 

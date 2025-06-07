@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import desc, asc
 from typing import List
 
-from backend.app.db.database import get_db
-from backend.app.db.models.models import Regra
-from backend.app.schemas.schemas import RegraCreate, Regra as RegraSchema
-from backend.app.schemas.filters import RegraFilter
+from app.db.database import get_db
+from app.db.models.models import Rule as Regra
+from app.schemas.schemas import RuleCreate as RegraCreate, RuleResponse as RegraSchema
+from app.schemas.filters import RuleFilter as RegraFilter
 
 router = APIRouter()
 
