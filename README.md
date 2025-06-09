@@ -141,3 +141,96 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ### Contact
 
 If you have any questions or suggestions, feel free to contact me at `aymenMir1001@gmail.com`.
+
+# iPassResponder
+
+Sistema de automação de respostas de email utilizando Inteligência Artificial.
+
+## 🚀 Estrutura do Projeto
+
+```
+iPassResponder/
+├── agents/                  # Scripts LangGraph
+│   ├── read_email.py       # Leitura de emails
+│   ├── analyze_email.py    # Análise de conteúdo
+│   ├── generate_response.py # Geração de respostas
+│   └── send_email.py       # Envio de emails
+│
+├── api/                     # API FastAPI
+│   ├── routes.py           # Rotas REST
+│   ├── schemas.py          # Schemas Pydantic
+│   └── auth_google.py      # Autenticação Google
+│
+├── db/                      # Banco SQLite
+│   ├── models.py           # Modelos SQLAlchemy
+│   ├── crud.py             # Operações CRUD
+│   └── database.py         # Configuração DB
+│
+├── data/                    # Cache temporário
+│
+├── frontend/               # Interface React
+│   └── src/               # Código fonte React
+│
+├── main.py                 # Entrada do fluxo IA
+├── run_api.py             # Servidor FastAPI
+├── requirements.txt       # Dependências Python
+└── .env.example          # Exemplo de configuração
+```
+
+## 🛠️ Requisitos
+
+- Python 3.8+
+- Node.js 14+
+- SQLite3
+
+## 📦 Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/ipassresponder.git
+cd ipassresponder
+```
+
+2. Instale as dependências Python:
+```bash
+pip install -r requirements.txt
+```
+
+3. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env
+# Edite .env com suas configurações
+```
+
+4. Instale as dependências do frontend:
+```bash
+cd frontend
+npm install
+```
+
+## 🚀 Executando o Projeto
+
+1. Inicie a API:
+```bash
+python run_api.py
+```
+
+2. Em outro terminal, inicie o frontend:
+```bash
+cd frontend
+npm run dev
+```
+
+3. Acesse http://localhost:3000
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a Branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
