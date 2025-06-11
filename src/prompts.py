@@ -1,5 +1,30 @@
-# catogorize email prompt template
-CATEGORIZE_EMAIL_PROMPT = """
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Módulo de templates de prompts para o sistema de automação de emails.
+
+Este módulo contém todas as definições de prompts utilizados pelo sistema
+para processar, categorizar e responder emails automaticamente.
+
+Attributes:
+    CATEGORIZE_EMAIL_PROMPT (str): Template para categorização de emails
+    GENERATE_RAG_QUERIES_PROMPT (str): Template para geração de queries RAG
+    GENERATE_RAG_ANSWER_PROMPT (str): Template para geração de respostas baseadas em RAG
+    EMAIL_WRITER_PROMPT (str): Template para escrita de emails
+    EMAIL_PROOFREADER_PROMPT (str): Template para revisão de emails
+
+Author: 
+    Seu Nome <seu.email@dominio.com>
+
+Copyright:
+    2024 Sua Empresa
+"""
+
+from typing import Final
+
+# Prompt para categorização de emails
+CATEGORIZE_EMAIL_PROMPT: Final[str] = """
 # **Role:**
 
 You are a highly skilled customer support specialist working for a SaaS company specializing in AI agent design. Your expertise lies in understanding customer intent and meticulously categorizing emails to ensure they are handled efficiently.
@@ -25,8 +50,8 @@ You are a highly skilled customer support specialist working for a SaaS company 
 * Base your categorization strictly on the email content provided; avoid making assumptions or overgeneralizing.
 """
 
-# Design RAG queries prompt template
-GENERATE_RAG_QUERIES_PROMPT = """
+# Prompt para geração de queries RAG
+GENERATE_RAG_QUERIES_PROMPT: Final[str] = """
 # **Role:**
 
 You are an expert at analyzing customer emails to extract their intent and construct the most relevant queries for internal knowledge sources.
@@ -39,7 +64,7 @@ You will be given the text of an email from a customer. This email represents th
 
 1. Carefully read and analyze the email content provided.
 2. Identify the main intent or problem expressed in the email.
-3. Construct up to three concise, relevant questions that best represent the customer’s intent or information needs.
+3. Construct up to three concise, relevant questions that best represent the customer's intent or information needs.
 4. Include only relevant questions. Do not exceed three questions.
 5. If a single question suffices, provide only that.
 
@@ -57,9 +82,8 @@ You will be given the text of an email from a customer. This email represents th
 * Use clear and professional language in your queries.
 """
 
-
-# standard QA prompt
-GENERATE_RAG_ANSWER_PROMPT = """
+# Prompt para geração de respostas baseadas em RAG
+GENERATE_RAG_ANSWER_PROMPT: Final[str] = """
 # **Role:**
 
 You are a highly knowledgeable and helpful assistant specializing in question-answering tasks.
@@ -93,8 +117,8 @@ You will be provided with pieces of retrieved context relevant to the user's que
 * Prioritize user clarity and ensure your answers directly address the question without unnecessary elaboration.
 """
 
-# write draft email pormpt template
-EMAIL_WRITER_PROMPT = """
+# Prompt para escrita de emails
+EMAIL_WRITER_PROMPT: Final[str] = """
 # **Role:**  
 
 You are a professional email writer working as part of the customer support team at a SaaS company specializing in AI agent development. Your role is to draft thoughtful and friendly emails that effectively address customer queries based on the given category and relevant information.  
@@ -103,7 +127,7 @@ You are a professional email writer working as part of the customer support team
 
 1. Use the provided email category, subject, content, and additional information to craft a professional and helpful response.  
 2. Ensure the tone matches the email category, showing empathy, professionalism, and clarity.  
-3. Write the email in a structured, polite, and engaging manner that addresses the customer’s needs.  
+3. Write the email in a structured, polite, and engaging manner that addresses the customer's needs.  
 
 # **Instructions:**  
 
@@ -121,7 +145,7 @@ You are a professional email writer working as part of the customer support team
    Best regards,  
    The Agentia Team  
    ```  
-   - Replace `[Customer Name]` with “Customer” if no name is provided.  
+   - Replace `[Customer Name]` with "Customer" if no name is provided.  
    - Ensure the email is friendly, concise, and matches the tone of the category.  
 
 3. If a feedback is provided, use it to improve the email while ensuring it still aligns with the predefined guidelines.  
@@ -134,8 +158,8 @@ You are a professional email writer working as part of the customer support team
 * Make sure to follow any feedback provided when crafting the email.  
 """
 
-# verify generated email prompt
-EMAIL_PROOFREADER_PROMPT = """
+# Prompt para revisão de emails
+EMAIL_PROOFREADER_PROMPT: Final[str] = """
 # **Role:**
 
 You are an expert email proofreader working for the customer support team at a SaaS company specializing in AI agent development. Your role is to analyze and assess replies generated by the writer agent to ensure they accurately address the customer's inquiry, adhere to the company's tone and writing standards, and meet professional quality expectations.
@@ -147,8 +171,8 @@ You are provided with the **initial email** content written by the customer and 
 # **Instructions:**
 
 1. Analyze the generated email for:
-   - **Accuracy**: Does it appropriately address the customer’s inquiry based on the initial email and information provided?
-   - **Tone and Style**: Does it align with the company’s tone, standards, and writing style?
+   - **Accuracy**: Does it appropriately address the customer's inquiry based on the initial email and information provided?
+   - **Tone and Style**: Does it align with the company's tone, standards, and writing style?
    - **Quality**: Is it clear, concise, and professional?
 2. Determine if the email is:
    - **Sendable**: The email meets all criteria and is ready to be sent.
