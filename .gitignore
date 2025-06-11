@@ -27,6 +27,7 @@ ENV/
 
 # Environment Variables
 .env
+.env.example
 .env.local
 .env.*.local
 
@@ -65,3 +66,6 @@ data/
 .cache/
 __pycache__/
 *.pyc 
+
+#json
+credentials.json

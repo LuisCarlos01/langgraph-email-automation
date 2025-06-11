@@ -7,6 +7,13 @@ Author: kaymen99
 
 # 🚀 **Customer Support Email Automation with AI Agents and RAG**
 
+[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/seu-usuario/ipassresponder/releases)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](docs/)
+
 ## 📩 **FULL TUTORIAL: Build AI-Powered Email Automation Using AI Agents + RAG!** 👉 [Read Now](https://dev.to/kaymen99/boost-customer-support-ai-agents-langgraph-and-rag-for-email-automation-21hj) 🎯   
 
 ![customer-support-ai-automation](https://github.com/user-attachments/assets/eb061276-0579-4e28-9360-482c8da33a9d)
@@ -234,3 +241,14 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
 4. Push para a Branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
+
+## 📚 Documentação
+
+- [Estrutura do Projeto](PROJECT_STRUCTURE.md)
+- [Guia de Contribuição](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
+- [Código de Conduta](CODE_OF_CONDUCT.md)
+
+## 🎯 Próximas Melhorias
+
+Confira nosso [roadmap de melhorias](CONTRIBUTING.md#próximas-melhorias-v120) para a versão 1.2.0.

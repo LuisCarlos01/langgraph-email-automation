@@ -1,23 +1,24 @@
 from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-from langchain_groq import ChatGroq
-from langchain_chroma import Chroma
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from .structure_outputs import *
-from .prompts import *
+from src.structure_outputs import *
+from src.prompts import *
+from db.database import SessionLocal
+from db.models import Email, EmailStatus
+from db.crud import buscar_similares
 
 class Agents():
     def __init__(self):
-        # Choose which LLMs to use for each agent (GPT-4o, Gemini, LLAMA3,...)
-        llama = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.1)
-        gemini = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.1)
+        # Choose which LLMs to use for each agent
+        llm = ChatOpenAI(model_name="gpt-4", temperature=0.1)
         
-        # QA assistant chat
-        embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
-        vectorstore = Chroma(persist_directory="db", embedding_function=embeddings)
-        retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+        # Configure embeddings for semantic search
+        self.embeddings = OpenAIEmbeddings()
+        
+        # Database session
+        self.db = SessionLocal()
 
         # Categorize email chain
         email_category_prompt = PromptTemplate(
@@ -26,7 +27,7 @@ class Agents():
         )
         self.categorize_email = (
             email_category_prompt | 
-            llama.with_structured_output(CategorizeEmailOutput)
+            llm.with_structured_output(CategorizeEmailOutput)
         )
 
         # Used to design queries for RAG retrieval
@@ -36,15 +37,15 @@ class Agents():
         )
         self.design_rag_queries = (
             generate_query_prompt | 
-            llama.with_structured_output(RAGQueriesOutput)
+            llm.with_structured_output(RAGQueriesOutput)
         )
         
-        # Generate answer to queries using RAG
+        # Generate answer to queries using RAG and database context
         qa_prompt = ChatPromptTemplate.from_template(GENERATE_RAG_ANSWER_PROMPT)
         self.generate_rag_answer = (
-            {"context": retriever, "question": RunnablePassthrough()}
+            {"context": self._get_similar_emails, "question": RunnablePassthrough()}
             | qa_prompt
-            | llama
+            | llm
             | StrOutputParser()
         )
 
@@ -58,7 +59,7 @@ class Agents():
         )
         self.email_writer = (
             writer_prompt | 
-            llama.with_structured_output(WriterOutput)
+            llm.with_structured_output(WriterOutput)
         )
 
         # Verify the generated email
@@ -68,5 +69,27 @@ class Agents():
         )
         self.email_proofreader = (
             proofreader_prompt | 
-            llama.with_structured_output(ProofReaderOutput) 
+            llm.with_structured_output(ProofReaderOutput) 
         )
+
+    def _get_similar_emails(self, query: str) -> str:
+        """
+        Recupera e-mails similares do banco de dados usando embeddings.
+        """
+        try:
+            # Gera embedding para a consulta
+            query_embedding = self.embeddings.embed_query(query)
+            
+            # Busca e-mails similares usando a função do crud
+            similar_emails = buscar_similares(self.db, query_embedding)
+            
+            # Formata o contexto
+            context = []
+            for email in similar_emails:
+                context.append(f"Assunto: {email.assunto}\nPergunta: {email.conteudo}\nResposta: {email.resposta_editada or email.resposta_gerada}")
+            
+            return "\n\n".join(context) if context else "Nenhum e-mail similar encontrado."
+            
+        except Exception as e:
+            print(f"Erro ao buscar e-mails similares: {e}")
+            return "Erro ao buscar e-mails similares."

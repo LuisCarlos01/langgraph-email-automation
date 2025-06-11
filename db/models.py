@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Text, DateTime, Enum
+from sqlalchemy import Column, String, Text, DateTime, Enum, ARRAY, Float
 from sqlalchemy.orm import declarative_base
 import enum
 from datetime import datetime
@@ -21,3 +21,4 @@ class Email(Base):
     resposta_editada = Column(Text, nullable=True)
     status = Column(Enum(EmailStatus), default=EmailStatus.PENDENTE, nullable=False)
     data_recebido = Column(DateTime, default=datetime.utcnow)
+    embedding = Column(ARRAY(Float), nullable=True)  # Vetor de embedding do conteúdo
