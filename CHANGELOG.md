@@ -5,6 +5,13 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.1.1] - 2024-03-20
+
+### Alterado
+- Refatoração do arquivo `prompts.py` para melhor organização
+- Melhoria na documentação do módulo seguindo PEP 257
+- Implementação de tipagem estática para constantes
+
 ## [1.1.0] - 2024-03-20
 
 ### Adicionado
